@@ -12,7 +12,7 @@ import UserLogout from './pages/UserLogout';
 // ===========================================================
 import CaptionLogin from './pages/CaptionLogin';
 import CaptainRiding from './pages/CaptainRiding';
-import CaptionSignUp from './pages/captionSignUp';
+import CaptionSignUp from './pages/CaptionSignUp';
 import CaptionLogout from './pages/CaptionLogout';
 // ==========================ss=================================
 import UserProtectedWraper from './pages/UserProtectedWraper';
