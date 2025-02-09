@@ -173,7 +173,7 @@ const Home = () => {
     try {
       setVehicalPanel(true);
       setpannelOpen(false);
-      const response = await axios.get(`http://192.168.1.40:4000/rides/get-fare?pickup=${pickUp}&destination=${Destination}`, {
+      const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/rides/get-fare?pickup=${pickUp}&destination=${Destination}`, {
         // params: { pickup, destination },
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`
