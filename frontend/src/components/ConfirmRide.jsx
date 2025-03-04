@@ -13,26 +13,26 @@ const ConfirmRide = (props) => {
          <h3 className='text-2xl font-semibold mb-3 mt-4'>Confirm Your Ride</h3>
 
          <div className='gap-2 flex justify-between flex-col items-center'>
-            <img className='h-20' src="https://purepng.com/public/uploads/large/purepng.com-honda-carshondacarshonda-manufacturingvehicle-honda-1701527486181k3is7.png" alt="" />
+            <img className='h-20' src={props.vehicleImage} alt={props.vehicleType} />
             <div className='w-full mt-5'>
                <div className='flex items-center gap-5 p-3 border-b-2'>
                <i className="ri-map-pin-line"></i>
                   <div>
-                     <h3 className='text-lg font-medium'>562/11-D</h3>
+                     <h3 className='text-lg font-medium'>Pickup</h3>
                      <p className='text-sm mt- text-gray-600'>{props.pickUp}</p>
                   </div>
                </div>
                <div className='flex items-center gap-5 p-3 border-b-2'>
                   <i className="text-lg ri-map-pin-2-fill"></i>
                   <div>
-                     <h3 className='text-lg font-medium'>562/11-D</h3>
+                     <h3 className='text-lg font-medium'>Destination</h3>
                      <p className='text-sm mt- text-gray-600'>{props.Destination}</p>
                   </div>
                </div>
                <div className='flex items-center gap-5 p-3'>
                <i className="ri-bank-card-line"></i>
                   <div>
-                     <h3 className='text-lg font-medium'>{Math.round(props.fare?.[props.VehicalType])}</h3>
+                     <h3 className='text-lg font-medium'>₹{Math.round(props.fare?.[props.VehicalType])}</h3>
                      <p className='text-sm mt- text-gray-600'>Cash Cash</p>
                   </div>
                </div>

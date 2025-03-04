@@ -2,6 +2,9 @@ import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios'
 import { UserDataContext } from '../context/UserContext';
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 const UserSignUp = () => {
 
     const [email, setEmail] = useState('');
@@ -34,7 +37,11 @@ const UserSignUp = () => {
         setUser(data.user)
         localStorage.setItem('token', data.token)
         navigate('/login')
+        toast.success("User successfully registered.");
+      }else{
+        toast.error("User registration failed.");
       }
+
 
       setEmail('')
       setFirstName('')

@@ -14,9 +14,8 @@ const WaitingForDriver = (props) => {
 
       <div className="flex items-center justify-between">
         <img
-          className="h-12"
-          src="https://purepng.com/public/uploads/large/purepng.com-honda-carshondacarshonda-manufacturingvehicle-honda-1701527486181k3is7.png"
-          alt="Vehicle"
+          className="h-20"
+          src={props.vehicleImage} alt={props.vehicleType}
         />
         <div className="text-right">
           <h2 className="text-lg font-medium">

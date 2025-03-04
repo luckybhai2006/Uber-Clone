@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { CaptainDataContext } from '../context/CaptainContext';
 import axios from 'axios';
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const CaptionLogin = () => {
   const [email, setEmail] = useState('');
@@ -27,10 +29,11 @@ const CaptionLogin = () => {
         setCaptain(data.captain);
         localStorage.setItem('token', data.token);
         navigate('/captain-home');
+        toast.success(response.data.message || "Login successful!");
       }
     } catch (error) {
       console.error('Login Failed:', error.response?.data || error.message);
-      alert(error.response?.data?.message || 'Invalid credentials');
+      toast.error(error.response?.data?.message || 'Invalid credentials');
     }
   };
 

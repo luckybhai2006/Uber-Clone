@@ -13,6 +13,7 @@ import {SocketContext} from '../context/SocketContext'
 import {UserDataContext} from '../context/UserContext'
 import { useNavigate } from 'react-router-dom'
 import LiveTracking from '../components/LiveTracking'
+import { toast } from 'react-toastify'
 
 const Home = () => {
   const [fare, setFare] = useState(null)
@@ -26,6 +27,7 @@ const Home = () => {
   const [exit, setExit] = useState(true)
   const [ride, setRide] = useState(null)
   const [VehicalType, setVehicalType] = useState(" ")
+  const [vehicleImage, setVehicleImage] = useState("");
 
   const [pickupSuggestions, setPickupSuggestions] = useState([])
   const [destinationSuggestions, setDestinationSuggestions] = useState([])
@@ -101,6 +103,20 @@ const Home = () => {
     e.preventDefault()
   }
 
+
+  const vehicleImages = {
+    car: "https://purepng.com/public/uploads/large/purepng.com-honda-carshondacarshonda-manufacturingvehicle-honda-1701527486181k3is7.png",
+    auto: "https://www.uber-assets.com/image/upload/f_auto,q_auto:eco,c_fill,h_368,w_552/v1648431773/assets/1d/db8c56-0204-4ce4-81ce-56a11a07fe98/original/Uber_Auto_558x372_pixels_Desktop.png",
+    moto: "https://www.uber-assets.com/image/upload/f_auto,q_auto:eco,c_fill,h_368,w_552/v1649231091/assets/2c/7fa194-c954-49b2-9c6d-a3b8601370f5/original/Uber_Moto_Orange_312x208_pixels_Mobile.png",
+  };
+
+  const handleVehicleSelect = (type) => {
+    setVehicalType(type);
+    setVehicleImage(vehicleImages[type]);  // Set the corresponding vehicle image
+  };
+
+
+
   useGSAP(() => {
     gsap.to(pannelRef.current, {
       height: pannelOpen ? '70%' : '0%',
@@ -173,7 +189,7 @@ const Home = () => {
     try {
       setVehicalPanel(true);
       setpannelOpen(false);
-      const response = await axios.get(`http://192.168.1.40:4000/rides/get-fare?pickup=${pickUp}&destination=${Destination}`, {
+      const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/rides/get-fare?pickup=${pickUp}&destination=${Destination}`, {
         // params: { pickup, destination },
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`
@@ -187,12 +203,13 @@ const Home = () => {
   }
 
   async function createRide() {
+    try {
       const response = await axios.post(
         `${import.meta.env.VITE_BASE_URL}/rides/create`,
         {
-          pickup:pickUp,
-          destination:Destination,
-          vehicleType:VehicalType,
+          pickup: pickUp,
+          destination: Destination,
+          vehicleType: VehicalType,
         },
         {
           headers: {
@@ -200,19 +217,24 @@ const Home = () => {
           },
         }
       );
-  
+      
       // Log the response data on success
       console.log('Ride created:', response.data.ride);
+      // Optionally show a success notification
+      toast.success("Ride created successfully!");
+    } catch (error) {
+      toast.error("No Captions found");
     }
+  }
   
   return (
     <div className="h-screen relative overflow-hidden">
       {/* Back ground Image */}
       <div className="h-screen w-screen">
-        <LiveTracking/>
+        <LiveTracking />
       </div>
       <img className="w-16 absolute left-5 top-5"
-        src=""
+        src="https://cdn.icon-icons.com/icons2/2407/PNG/512/uber_icon_146079.png"
         alt="Uber Icon" />
       {/* Main Overlay */}
       <div className="absolute justify-end top-0 w-full h-screen flex flex-col">
@@ -275,7 +297,7 @@ const Home = () => {
       </div>
       {/* vehical pannel */}
       <div ref={vehicalPannelReff} className='fixed w-full border-t-4 border-black z-10 bottom-0 translate-y-full bg-white p-3 py-14 px-3 pt-14'>
-        <VehicalPannel fare={fare} setFare={setFare} setVehicalType={setVehicalType}  setConfirmRide={setConfirmRide} setVehicalPanel={setVehicalPanel} />
+        <VehicalPannel fare={fare} setVehicalPanel={setVehicalPanel} setFare={setFare} setVehicalType={setVehicalType}  setConfirmRide={setConfirmRide} onVehicleSelect={handleVehicleSelect} />
       </div>
       <div ref={ConsfirmRideReff} className='fixed border-t-4 border-black w-full z-10 bottom-0 translate-y-full bg-white p-3 py-5 px-3 pt-6'>
   <ConfirmRide
@@ -283,10 +305,11 @@ const Home = () => {
     pickUp={pickUp}
     fare={fare}
     confirmRide={confirmRide}
-    VehicalType={VehicalType}
     Destination={Destination}
     setConfirmRide={setConfirmRide}
     setLookingForADriver={setLookingForADriver}
+    VehicalType={VehicalType}
+    vehicleImage={vehicleImage}
   />
 </div>
 <div ref={LookingForDriverReff} className='fixed border-t-4 border-black w-full z-10 bottom-0 translate-y-full bg-white p-3 py-12 px-3 pt-8'>
@@ -295,13 +318,16 @@ const Home = () => {
     setExit={setExit}
     pickUp={pickUp}
     VehicalType={VehicalType}
+    // vehicalType={VehicalType}
+    vehicleImage={vehicleImage}
     fare={fare}
     Destination={Destination}
     setLookingForADriver={setLookingForADriver}
   />
 </div>
       <div ref={WaitiingForADriverReff} className='fixed w-full z-10 bottom-0 translate-y-full bg-white p-3 py-14 px-3 pt-14'>
-        <WaitingForDriver ride={ride} setWaitiingForADriver={setWaitiingForADriver} />
+        <WaitingForDriver ride={ride} VehicalType={VehicalType}
+    vehicleImage={vehicleImage} setWaitiingForADriver={setWaitiingForADriver} />
       </div>
     </div>
   )

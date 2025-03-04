@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom'
 import { CaptainDataContext } from '../context/CaptainContext'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const CaptainSignup = () => {
 
@@ -46,6 +48,10 @@ const CaptainSignup = () => {
       setCaptain(data.captain)
       localStorage.setItem('token', data.token)
       navigate('/captain-login')
+      toast.success(response.data.message || "Registration successful!");
+    } else{
+      console.error('Login Failed:', error.response?.data || error.message);
+      toast.error(error.response?.data?.message || 'Invalid credentials');
     }
 
     setEmail('')

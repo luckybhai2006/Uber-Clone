@@ -93,28 +93,41 @@ useGSAP(() => {
     })
   }
 }, [ConfirmRidePopUpPanel])
-  return (
-    <div className="h-screen">
-      <div className="h-[75%]">
-        <LiveTracking/>
-      </div>
-      <div className='fixed top-0 p-3 items-center justify-center w-screen overflow-hidden'>
-        <img className='w-16' src="https://cdn.icon-icons.com/icons2/2407/PNG/512/uber_icon_146079.png" alt="" />
-      </div>
-        <Link to="/captain/logout" className='fixed right-2 top-16 h-10 w-10 bg-white flex items-center justify-center rounded-full'>
-          <i className="ri-logout-box-r-line"></i>
-        </Link>
-      <div className="h-2/2 border-t-4 border-black p-6">
-        <CaptainDetails />
-      </div>
-      <div ref={PopUpPanelReff} className="fixed border-t-4 border-black w-full z-10 bottom-0 bg-white translate-y-full  p-3 py-10 px-3 pt-12">
-        <RidePopUp setRidePopUpPanel={setRidePopUpPanel} setConfirmRidePopUpPanel={setConfirmRidePopUpPanel} confirmRide={confirmRide} ride={ride}/>
-      </div>
-      <div ref={ConfirmRidePopUpReff} className="fixed border-t-4 border-black h-screen w-full z-10 bottom-0 translate-y-full bg-white p-3 py-10 px-3 pt-12">
-        <ConfirmRidePopUp setRidePopUpPanel={setRidePopUpPanel} setConfirmRidePopUpPanel={setConfirmRidePopUpPanel} ride={ride}/>
-      </div>
+return (
+  <div className="h-screen relative">
+    <div className="h-[75%] relative">
+      <LiveTracking />
+      <img 
+        className='w-16 absolute top-5 left-5' 
+        src="https://freelogopng.com/images/all_img/1659761297uber-icon.png" 
+        alt="Uber Icon" 
+      />
     </div>
-  )
+    <Link 
+      to="/captain/logout" 
+      className='fixed right-2 top-16 h-10 w-10 bg-white flex items-center justify-center rounded-full shadow-md'>
+      <i className="ri-logout-box-r-line"></i>
+    </Link>
+    <div className="h-2/2 border-t-4 border-black p-6">
+      <CaptainDetails />
+    </div>
+    <div ref={PopUpPanelReff} className="fixed border-t-4 border-black w-full z-10 bottom-0 bg-white translate-y-full p-3 py-10 px-3 pt-12">
+      <RidePopUp 
+        setRidePopUpPanel={setRidePopUpPanel} 
+        setConfirmRidePopUpPanel={setConfirmRidePopUpPanel} 
+        confirmRide={confirmRide} 
+        ride={ride}
+      />
+    </div>
+    <div ref={ConfirmRidePopUpReff} className="fixed border-t-4 border-black h-screen w-full z-10 bottom-0 translate-y-full bg-white p-3 py-10 px-3 pt-12">
+      <ConfirmRidePopUp 
+        setRidePopUpPanel={setRidePopUpPanel} 
+        setConfirmRidePopUpPanel={setConfirmRidePopUpPanel} 
+        ride={ride}
+      />
+    </div>
+  </div>
+)
 }
 
 export default CaptainHome

@@ -42,7 +42,7 @@ const CaptainRiding = () => {
             <h5 className='p-1 text-center w-[90%] absolute top-3'>
                <i className="text-3xl text-gray-800 ri-arrow-up-wide-line" />
             </h5>
-            <h4 className='text-xl font-semibold'>{"4 km away"}</h4>
+            <h4 className='text-xl font-semibold'>{ride?.duration}</h4>
             <button className='bg-green-600 p-3 px-10 text-white font-semibold p-2 rounded-lg'>Complete Ride</button>
          </div>
          <div ref={FinishRideReff} className='fixed w-full z-10 bottom-0 translate-y-full bg-white p-3 py-14 px-3 pt-14'>

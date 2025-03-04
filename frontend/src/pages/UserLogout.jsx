@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const UserLogout = () => {
   const [token, setToken] = useState(localStorage.getItem("token"));
@@ -10,9 +12,9 @@ const UserLogout = () => {
         // Clear the token state and remove it from localStorage
         setToken("");
         localStorage.removeItem("token");
-        console.log("User successfully logged out.");
+        toast.success("User successfully logged out.");
       } catch (error) {
-        console.error("Error during logout:", error.message);
+        toast.error("Error during logout:", error.message);
       }
     };
 

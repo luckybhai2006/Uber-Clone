@@ -1,6 +1,8 @@
 import axios from 'axios';
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const FinishRide = (props) => {
 
@@ -19,6 +21,7 @@ const FinishRide = (props) => {
       props.setFinisRide(false)
       // props.setRidePopPAnel(false)
       navigate('/captain-home')
+      toast.success("Ride finished successfully.");
    }
 }
   return (
@@ -44,14 +47,14 @@ const FinishRide = (props) => {
                <div className='flex items-center gap-5 p-3 border-b-2'>
                   <i className="ri-map-pin-line"></i>
                   <div>
-                     <h3 className='text-lg font-medium'>562/11-D</h3>
+                     <h3 className='text-lg font-medium'>Pickup</h3>
                      <p className='text-sm mt-1 text-gray-600'>{props.ride?.pickup}</p>
                   </div>
                </div>
                <div className='flex items-center gap-5 p-3 border-b-2'>
                   <i className="text-lg ri-map-pin-2-fill"></i>
                   <div>
-                     <h3 className='text-lg font-medium'>562/11-D</h3>
+                     <h3 className='text-lg font-medium'>Destination</h3>
                      <p className='text-sm mt-1 text-gray-600'>{props.ride?.destination}</p>
                   </div>
                </div>

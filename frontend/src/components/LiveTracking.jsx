@@ -37,7 +37,7 @@ const LiveTracking = () => {
       <GoogleMap
         mapContainerStyle={containerStyle}
         center={location}
-        zoom={10}
+        zoom={13}
       >
         <Marker position={location} />
       </GoogleMap>

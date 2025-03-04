@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import {UserDataContext} from '../context/UserContext'
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios'
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const UserLogin = () => {
   const [email, setEmail] = useState('');
@@ -26,6 +28,9 @@ const UserLogin = () => {
       setUser(data.user)
       localStorage.setItem('token', data.token)
       navigate('/home')
+      toast.success(response.data.message || "Login successful!");
+    }else{
+      toast.error(error.response?.data?.message || 'Invalid credentials');
     }
 
     setEmail('');

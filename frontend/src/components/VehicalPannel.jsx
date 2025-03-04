@@ -43,6 +43,7 @@ const VehicalPannel = (props) => {
           props.setConfirmRide(true);
           props.setVehicalPanel(false);
           handleVehicleSelection('car');
+          props.onVehicleSelect('car');
         }}
         className="flex border-2 active:border-black mb-2 rounded-xl w-full p-3 items-center justify-between"
       >
@@ -71,6 +72,7 @@ const VehicalPannel = (props) => {
           props.setConfirmRide(true);
           props.setVehicalPanel(false);
           handleVehicleSelection('auto');
+          props.onVehicleSelect('auto')
         }}
         className="flex border-2 active:border-black mb-2 rounded-xl w-full p-3 items-center justify-between"
       >
@@ -99,6 +101,7 @@ const VehicalPannel = (props) => {
           props.setConfirmRide(true);
           props.setVehicalPanel(false);
           handleVehicleSelection('moto');
+          props.onVehicleSelect('moto')
         }}
         className="flex border-2 active:border-black mb-2 rounded-xl w-full p-3 items-center justify-between"
       >
@@ -124,4 +127,4 @@ const VehicalPannel = (props) => {
   );
 };
 
-export default VehicalPannel;
+export default VehicalPannel
